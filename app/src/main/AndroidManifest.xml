@@ -13,10 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DetailsActivity"></activity>
-        <activity android:name=".DishesActivity" />
-        <activity android:name=".MapActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".order.OrderActivity"></activity>
+        <activity android:name=".dishes.DetailsActivity" />
+        <activity android:name=".dishes.DishesActivity" />
+        <activity android:name=".map.MapActivity" />
+        <activity android:name=".login.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

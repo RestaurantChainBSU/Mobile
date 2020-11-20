@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".MainActivity">
+    tools:context=".login.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,20 +39,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
-            app:boxStrokeColor="@color/main"
-            app:hintTextColor="@color/main"
-            android:textColorHint="@color/main"
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            android:textColorHint="@color/white"
             android:textIsSelectable="true"
             android:id="@+id/username">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/loginInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username"
-                android:backgroundTint="#FFFFFF"
-                android:textColorHint="@color/main"
+                android:backgroundTint="@color/main"
+                android:hint="Логин"
                 android:inputType="text"
-                />
+                android:textColorHint="@color/main" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,20 +61,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
-            app:boxStrokeColor="@color/main"
-            app:hintTextColor="@color/main"
-            android:textColorHint="@color/main"
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            android:textColorHint="@color/white"
             app:passwordToggleEnabled="true"
             android:id="@+id/password">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
-                android:backgroundTint="#FFFFFF"
-                android:textColorHint="@color/main"
+                android:backgroundTint="@color/main"
+                android:hint="Пароль"
                 android:inputType="textPassword"
-                />
+                android:textColorHint="@color/main" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,8 +84,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/main"
-            android:text="login"
-            android:textColor="@android:color/white" />
+            android:text="Войти"
+            android:textColor="@color/white" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/logup"
@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/main"
-            android:text="Logup"
+            android:text="Зарегистрироваться"
             android:textColor="@android:color/white" />
     </LinearLayout>
 

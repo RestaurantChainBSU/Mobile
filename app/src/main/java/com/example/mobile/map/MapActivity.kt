@@ -1,9 +1,13 @@
-package com.example.mobile
+package com.example.mobile.map
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mobile.R
+import com.example.mobile.dishes.DishesActivity
+import com.example.mobile.network.Apifactory
+import com.example.mobile.order.OrderActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -11,19 +15,14 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_map.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private var gmap: GoogleMap? = null
-    private val restaraunts
-            = listOf(
-        LatLng(53.901028, 27.567705) to "Restaraunt1",
-        LatLng(53.877542, 27.581999) to "Restaraunt2",
-        LatLng(53.872497, 27.473768) to "Restaraunt3",
-        LatLng(53.908097, 27.436013) to "Restaraunt4",
-        LatLng(53.951222, 27.535651) to "Restaraunt5",
-        LatLng(53.872102, 27.638550) to "Restaraunt6"
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +34,10 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         mapView.onCreate(mapViewBundle)
         mapView.getMapAsync(this)
+
+        imageButton2.setOnClickListener {
+            startActivity(Intent(this, OrderActivity::class.java))
+        }
     }
 
     public override fun onSaveInstanceState(outState: Bundle) {
@@ -83,17 +86,27 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         val ny = LatLng(53.901028, 27.567705)
         gmap!!.moveCamera(CameraUpdateFactory.newLatLng(ny))
 
-        for(item in restaraunts) {
-            gmap!!.addMarker(
-                MarkerOptions()
-                    .position(item.first)
-                    .title(item.second)
-                    .icon(
-                        BitmapDescriptorFactory
-                            .defaultMarker(BitmapDescriptorFactory.HUE_RED)
+        loading.visibility = View.VISIBLE
+        spin_kit.visibility = View.VISIBLE
+        GlobalScope.launch(Dispatchers.IO) {
+            val restaraunts = Apifactory.api.getRestaraunts().await()
+            withContext(Dispatchers.Main) {
+                loading.visibility = View.INVISIBLE
+                spin_kit.visibility = View.INVISIBLE
+                for(item in restaraunts) {
+                    gmap!!.addMarker(
+                        MarkerOptions()
+                            .position(LatLng(item.latitude, item.longitude))
+                            .title("${item.id}")
+                            .icon(
+                                BitmapDescriptorFactory
+                                    .defaultMarker(BitmapDescriptorFactory.HUE_RED)
+                            )
                     )
-            )
+                }
+            }
         }
+
         gmap!!.setOnMarkerClickListener {
             val intent = Intent(this, DishesActivity::class.java)
             val b = Bundle()

@@ -1,18 +1,21 @@
 package com.example.mobile.network
 
+import com.example.mobile.network.dishes.Dishes
+import com.example.mobile.network.restaraunts.Restaraunts
 import kotlinx.coroutines.Deferred
 import okhttp3.ResponseBody
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface Backend {
-//    @GET("/sessionKey")
-//    fun getSesionKey(@Query("publicKey")address: String): Deferred<SessionKey>
-//
-//    @GET("/file")
-//    fun getFile(@Query("fileName")address: String = "file2.txt",
-//                @Query("sessionKey")key: String): Deferred<Text>
-//
-//    @GET("/filesList")
-//    fun geListOfFiles(): Deferred<Files>
+    @GET("restaurants")
+    fun getRestaraunts(): Deferred<Restaraunts>
+
+    @GET("dishes/{id}")
+    fun getDishes(@Path("id") id: Int): Deferred<Dishes>
+
+    @GET("users/{login}/{passw}")
+    fun login(@Path("login") login: String, @Path("passw") passw: String): Deferred<Login>
+
+    @POST("users/")
+    fun signUp(@Body request: SignUp): Deferred<Login>
 }

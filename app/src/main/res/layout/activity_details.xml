@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="#ffffff"
-    tools:context=".DetailsActivity">
+    tools:context=".dishes.DetailsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
@@ -61,6 +61,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_margin="20dp"
