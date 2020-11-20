@@ -1,10 +1,11 @@
 package com.example.mobile
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
@@ -16,12 +17,13 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private var gmap: GoogleMap? = null
     private val restaraunts
             = listOf(
-                LatLng(53.901028, 27.567705) to "Restaraunt1",
-                LatLng(53.877542, 27.581999) to "Restaraunt2",
-                LatLng(53.872497, 27.473768) to "Restaraunt3",
-                LatLng(53.908097, 27.436013) to "Restaraunt4",
-                LatLng(53.951222, 27.535651) to "Restaraunt5",
-                LatLng(53.872102, 27.638550) to "Restaraunt6")
+        LatLng(53.901028, 27.567705) to "Restaraunt1",
+        LatLng(53.877542, 27.581999) to "Restaraunt2",
+        LatLng(53.872497, 27.473768) to "Restaraunt3",
+        LatLng(53.908097, 27.436013) to "Restaraunt4",
+        LatLng(53.951222, 27.535651) to "Restaraunt5",
+        LatLng(53.872102, 27.638550) to "Restaraunt6"
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,11 +90,21 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                     .title(item.second)
                     .icon(
                         BitmapDescriptorFactory
-                            .defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                            .defaultMarker(BitmapDescriptorFactory.HUE_RED)
+                    )
             )
         }
+        gmap!!.setOnMarkerClickListener {
+            val intent = Intent(this, DishesActivity::class.java)
+            val b = Bundle()
+            b.putString("key", it.title)
 
+            intent.putExtras(b)
 
+            startActivity(intent)
+
+            true
+        }
     }
 
     companion object {

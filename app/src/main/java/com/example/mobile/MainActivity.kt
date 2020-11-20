@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        button.setOnClickListener {
+        logup.setOnClickListener {
             startActivity(Intent(this, MapActivity::class.java))
         }
     }
