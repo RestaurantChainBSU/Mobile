@@ -29,12 +29,17 @@ class DishesActivity : AppCompatActivity() {
         spin_kitDishes.visibility = View.VISIBLE
         GlobalScope.launch(Dispatchers.IO) {
 
-            val restaraunts = Apifactory.api.getDishes(Integer.parseInt(name)).await()
-            withContext(Dispatchers.Main) {
-                adapter.submitList(restaraunts)
-                loadingDishes.visibility = View.INVISIBLE
-                spin_kitDishes.visibility = View.INVISIBLE
+            try {
+                val restaraunts = Apifactory.api.getDishes(Integer.parseInt(name)).await()
+                withContext(Dispatchers.Main) {
+                    adapter.submitList(restaraunts) 
+                    loadingDishes.visibility = View.INVISIBLE
+                    spin_kitDishes.visibility = View.INVISIBLE
+                }
+            } catch (e: Exception) {
+
             }
+
         }
 
         list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 } catch (e: Exception) {
-                    
+
                 }
 
             }
