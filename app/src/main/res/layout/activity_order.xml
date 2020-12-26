@@ -8,7 +8,7 @@
     tools:context=".order.OrderActivity">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/logup2"
+        android:id="@+id/makeOrder"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -47,6 +47,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/addres"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/main"

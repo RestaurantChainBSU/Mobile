@@ -32,7 +32,7 @@ class DishesActivity : AppCompatActivity() {
             try {
                 val restaraunts = Apifactory.api.getDishes(Integer.parseInt(name)).await()
                 withContext(Dispatchers.Main) {
-                    adapter.submitList(restaraunts) 
+                    adapter.submitList(restaraunts)
                     loadingDishes.visibility = View.INVISIBLE
                     spin_kitDishes.visibility = View.INVISIBLE
                 }

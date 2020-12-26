@@ -22,4 +22,8 @@ interface Backend {
 
     @POST("users/")
     fun signUp(@Body request: SignUp): Deferred<Login>
+
+    @POST("orders/")
+    @JvmSuppressWildcards
+    fun makeOrder(@Body request: List<Any>): Deferred<Login>
 }

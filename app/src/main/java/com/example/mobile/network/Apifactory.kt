@@ -29,7 +29,7 @@ object Apifactory{
 
     fun retrofit() : Retrofit = Retrofit.Builder()
         .client(tmdbClient)
-        .baseUrl("http://adroit-medium-271012.wm.r.appspot.com/")
+        .baseUrl("http://34.68.17.134:8080/")
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
